@@ -1,0 +1,17 @@
+<ion-header>
+
+  <ion-navbar color="engenharia">
+    <ion-title>Estoque de Obra</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <p text-center>Itens e Quantidades já utilizados na obra:</p>
+  <ion-list>
+    <ion-item *ngFor="let item of itensEntradas;let i = index" text-wrap>
+      {{materiasPrimas[i]}} : {{item.quantidade}} {{unidades[i]}}
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,38 @@
+
+<ion-header>
+  <ion-navbar color="engenharia">
+    <ion-title>Contas a Pagar</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <p text-center>(clique na conta, para mais detalhes)</p>
+    <ion-item-group>
+      <ion-item-divider color="danger">Vencidas</ion-item-divider>
+        <ion-item *ngFor="let conta of contasVencidas;let i = index" text-wrap>
+          <button ion-item (click)="detalharConta(conta)">
+            {{conta.numero}} - {{fornecedoresVencidos[i]}} : {{conta.valor | currency:'BRL'}}
+          </button>
+        </ion-item>
+      <p float-right>Total:{{totalVencidas | currency:'BRL'}}</p>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider color="primary">Em aberto</ion-item-divider>
+        <ion-item *ngFor="let conta of contasAbertas;let i = index" text-wrap>
+          <button ion-item (click)="detalharConta(conta)">
+            {{conta.numero}} - {{fornecedoresEmAberto[i]}} : {{conta.valor | currency:'BRL'}}
+          </button>
+        </ion-item>
+      <p float-right>Total:{{totalEmAberto | currency:'BRL'}}</p>
+    </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="secondary">Quitadas</ion-item-divider>
+    <ion-item *ngFor="let conta of contasQuitadas;let i = index" text-wrap>
+      <button ion-item (click)="detalharConta(conta)">
+        {{conta.numero}} - {{fornecedoresQuitados[i]}} : {{conta.valor | currency:'BRL'}}
+      </button>
+    </ion-item>
+    <p float-right>Total:{{totalQuitadas | currency:'BRL'}}</p>
+  </ion-item-group>
+</ion-content>

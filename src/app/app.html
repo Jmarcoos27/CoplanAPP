@@ -1,1 +1,23 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content" [enabled]="menu" menuToggle>
+  <ion-header>
+    <ion-toolbar color="engenharia">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item>
+        Home
+      </button>
+      <button ion-item (click)="onClickObras()">
+        Obras
+      </button>
+      <button ion-item>
+        Sobre
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+<ion-nav [root]="rootPage" #content></ion-nav>

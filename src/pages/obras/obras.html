@@ -1,0 +1,38 @@
+<ion-header>
+
+  <ion-navbar color="engenharia">
+    <ion-title>Obras</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list *ngFor="let obra of obras">
+    <ion-item text-wrap text-uppercase>
+      <ion-card>
+        <img src="assets/imgs/obra.png">
+        <ion-card-header>
+          {{obra.nome}}
+        </ion-card-header>
+        <ion-card-content>
+            {{obra.endereco}}, {{obra.bairro}}
+        </ion-card-content>
+        <ion-row class="cardfooter">
+          <ion-col>
+            <button ion-button clear small icon-start item-start color="engenharia" (click)="onClickContasAPagar(obra)">
+              <ion-icon name="cash" margin-right></ion-icon>
+              Contas a Pagar
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button clear smaal icon-start item-end color="engenharia" (click)="onItensClick(obra)">
+              <ion-icon name="list" margin-right></ion-icon>
+              Itens
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>
