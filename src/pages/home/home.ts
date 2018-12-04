@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { ObrasPage } from './../obras/obras';
 
 @Component({
   selector: 'page-home',
@@ -10,4 +11,7 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
   }
 
+  onClickObras(){
+    this.navCtrl.setRoot(ObrasPage)
+  }
 }

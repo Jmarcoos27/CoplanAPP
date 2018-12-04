@@ -11,10 +11,11 @@ export class AuthService{
   private baseUrlService:string = '';
 
   constructor(private http:HttpClient,private configService: ConfigService){
-    this.baseUrlService = this.configService.getUrlService() + '/usuario/';
+    this.baseUrlService = this.configService.getUrlService() + '/usuario_app/';
   }
 
   logar(usuario:UsuarioModel){
+    console.log(usuario);
     this.getUsuarioAppPorLoginESenha(usuario).subscribe(response=>{
       let user:UsuarioModel = <UsuarioModel>response
       if(user.nomeUsuario != null){
@@ -22,12 +23,14 @@ export class AuthService{
         this.usuarioConectado.emit(true);
         localStorage.setItem('currentUser',JSON.stringify(user));
       }
-      else this.usuarioConectado.emit(false);
+      else {
+        this.usuarioConectado.emit(false);
+      }
     });
   }
 
   getUsuarioAppPorLoginESenha(usuario:UsuarioModel){
-    return this.http.get(this.baseUrlService+usuario.login+"/"+usuario.senha)
+    return this.http.get(this.baseUrlService+usuario.login+"/"+usuario.senha);
   }
 
   logOut(){

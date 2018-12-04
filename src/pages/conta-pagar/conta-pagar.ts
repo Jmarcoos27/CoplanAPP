@@ -76,9 +76,9 @@ export class ContaPagarPage {
         });
         const httpcallsVencidas = [];
         for ( let i = 0; i < this.contasVencidas.length; i++) {
-          httpcallsQuitadas.push(this.pessoaService.getPessoa(this.contasVencidas[i].pessoa));
+          httpcallsVencidas.push(this.pessoaService.getPessoa(this.contasVencidas[i].pessoa));
         }
-        forkJoin(httpcallsQuitadas).subscribe(res => {
+        forkJoin(httpcallsVencidas).subscribe(res => {
           res.forEach(response => {
             const pessoa: PessoaModel = <PessoaModel> response;
             this.fornecedoresVencidos.push(pessoa.nome);
@@ -103,12 +103,20 @@ export class ContaPagarPage {
   detalharConta(conta:ContasAPagarModel){
     let vencimento:Date = new Date(conta.vencimento)
     let emissao:Date = new Date(conta.data_emissao)
+    let fornecedor: string;
+    forkJoin(this.pessoaService.getPessoa(conta.pessoa)).subscribe(res =>{
+      res.forEach(response => {
+        let dealer:PessoaModel = <PessoaModel>response;
+        fornecedor = dealer.nome;
+        console.log(dealer);
+      });
+    });
+    console.log(fornecedor);
     const alert = this.alertCtrl.create({
-      title: 'Conta de ' + conta.pessoa,
+      title: 'Conta ' + conta.numero,
       subTitle: 'Emissão: ' + emissao.toLocaleDateString() + '\n' +
                 'Vencimento: ' + vencimento.toLocaleDateString() + '\n' +
-                'Valor:R$ ' + conta.valor + '\n' +
-                'Observação: ' + conta.obs,
+                'Valor:R$ ' + conta.valor.toLocaleString() + '\n',
       buttons: ['OK']
     });
     alert.present();
